@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Konstantin Ustyugov](https://up.htmlacademy.ru/javascript/27/user/1996827).
-* Наставник: `Неизвестно`.
+* Наставник: [Александр Конотоп](https://htmlacademy.ru/profile/id2123489).
 
 ---
 
