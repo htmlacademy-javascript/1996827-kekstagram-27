@@ -20,7 +20,7 @@ function randomIntInRange(min, max) {
 randomIntInRange(4, 3);
 
 /**
- * Проверит максимальную длинну строки
+ * Проверит максимальную длину строки
  * @param {string} value
  * @param {number} maxLength По умолчанию 100
  */
@@ -29,3 +29,4 @@ function validateMaxLength(value, maxLength = 100) {
 }
 
 validateMaxLength('ererer', 1);
+
