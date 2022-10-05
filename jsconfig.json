@@ -1,5 +1,5 @@
 {
-  "include": ['js/**/*'],
+  "include": ["js/**/*"],
   "compilerOptions": {
     "target": "ESNext",
     "moduleResolution": "NodeNext",

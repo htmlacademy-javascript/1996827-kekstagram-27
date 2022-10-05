@@ -1,21 +1,32 @@
-// Test ESLint
-// function getSum (a, b) {
-//   const description = "сумма двух чисел равна";
-//   const sum = a + b;
-//   return description+''+sum;
-// }
-// getSum (1, 4);
-// npm run lint
-// npm run lint -- --fix
 /**
- * @param {number} a
- * @param {number} b
+ * Вернет целое положительное в диапазоне `min`, `max`
+ * @param {number} min
+ * @param {number} max
  */
-function getSum (a, b) {
-  const description = 'сумма двух чисел равна';
-  const sum = a + String(b);
-  return `${description}${sum}`;
+function randomIntInRange(min, max) {
+  const range = [min, max];
+
+  if (!range.every(Number.isInteger)) {
+    throw new Error(`Нецелочисленный диапазон: [${range}]`);
+  }
+
+  if (min < 0 || max < 0) {
+    throw new Error(`Неподдерживаемый диапазон: [${range}]`);
+  }
+
+  return Math.round((max - min) * Math.random() + min);
 }
-getSum (1, 4);
-// npm run lint
-// npm run lint -- --fix
+
+randomIntInRange(4, 3);
+
+/**
+ * Проверит максимальную длину строки
+ * @param {string} value
+ * @param {number} maxLength По умолчанию 100
+ */
+function validateMaxLength(value, maxLength = 100) {
+  return value.length <= maxLength;
+}
+
+validateMaxLength('ererer', 1);
+
