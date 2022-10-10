@@ -30,7 +30,7 @@ function validateMaxLength(value, maxLength = 100) {
   return value.length <= maxLength;
 }
 
-validateMaxLength('ererer', 1);
+// validateMaxLength('ererer', 1);
 
 /*
 Структура каждого объекта должна быть следующей:
@@ -66,8 +66,10 @@ comments, массив объектов — список комментарие�
 Имена авторов также должны быть случайными. Набор имён для комментаторов составьте сами. Подставляйте случайное имя в поле name.
 */
 
-const id = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
+// const id = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
+// const id = [];
 
+const ARRAY_MAX_COUNT = 25;
 const GET_COMMENTS_COUNT = 4;
 // const CREATE_FOTO_COUNT = 2;
 
@@ -96,15 +98,43 @@ const NAMES = [
   'Вашингтон',
 ];
 
-const getRandomArrayElement = (elements) => elements[randomIntInRange(1, id.length - 1)];
+const getRandomArrayElement = (elements) => elements[randomIntInRange(1, ARRAY_MAX_COUNT)];
+const getRandomArray = Array.from({length: ARRAY_MAX_COUNT}, () => randomIntInRange(1, ARRAY_MAX_COUNT));
+
+/**
+ * Создает фото
+ * @returns
+ */
+const createFoto = () => {
+  let foto = {
+    id: getRandomArray,
+    url: `photos/{${randomIntInRange(1, ARRAY_MAX_COUNT)}}.jpg`,
+    description: description[randomIntInRange(1, description.length - 1)],
+    likes: randomIntInRange(15, 200),
+    comments: getComments (),
+  };
+
+  // Правильный вывод ЗНАЧЕНИЙ ОБЪЕКТА
+  // const keys = Object.keys(foto);
+  // keys.forEach((key) => {
+  //     console.log(
+  //         foto[key]
+  //     );
+  // });
+
+  return foto;
+};
 
 const comments = [];
 
+/**
+ * Создает комментарий
+ * @returns
+ */
 function getComments () {
   for (let i = 0; i < GET_COMMENTS_COUNT; i++) {
-    // почему подсвечиваются свойства если const comments = []; внутри for
-    comments.push({i});
-    comments[i].id = getRandomArrayElement(id);
+    comments.push([i]);
+    comments[i].id = getRandomArrayElement(getRandomArray);
     comments[i].avatar = `img/avatar-${randomIntInRange(1, 6)}.svg`;
     comments[i].message = message[randomIntInRange(1, message.length - 1)];
     comments[i].name = NAMES[randomIntInRange(1, NAMES.length - 1)];
@@ -114,55 +144,5 @@ function getComments () {
   // console.log(typeof(comments)); // почему объект?
 }
 
-const createFoto = () => ({
-  id: getRandomArrayElement(id),
-  url: `photos/{${getRandomArrayElement(id)}}.jpg`,
-  description: description[randomIntInRange(1, description.length - 1)],
-  likes: randomIntInRange(15, 200),
-  comments: getComments ()
-});
-
-// getComments ();
 console.log(createFoto());
-// const similarFotos = [];
-
-// const similarFotos = Array.from({length: CREATE_FOTO_COUNT}, createFoto);
-
-// for (let i = 1; i < 3; i++) {
-//   similarFotos[i] = createFoto();
-// }
-
-// console.log(similarFotos);
-
-// comments[0] = {
-//   id: 135,
-//   avatar: 'img/avatar-6.svg',
-//   message: 'В целом всё неплохо. Но не всё.',
-//   name: 'Артём',
-// };
-// comments.push({});
-// comments[1].id = getRandomArrayElement(id);
-// comments[1].avatar = `img/avatar-${randomIntInRange(1, 6)}.svg`;
-// comments[1].message = message[randomIntInRange(1, message.length - 1)];
-// comments[1].name = getRandomArrayElement(NAMES);
-// console.log(comments);
-// console.log(typeof(comments)); // почему объект?
-
-// 2
-// const createFoto = () => ({
-//   id: id[randomIntInRange(1, id.length - 1)],
-//   url: `photos/{${randomIntInRange(1, id.length - 1)}}.jpg`
-// });
-// 1
-// const createFoto = () => {
-//   const randomId = randomIntInRange(1, id.length - 1);
-//   const randomUrl = `photos/{${randomIntInRange(1, id.length - 1)}}.jpg`;
-
-//   return {
-//     id: id[randomId],
-//     url: randomUrl
-//   };
-// };
-
-// console.log(createFoto());
 
