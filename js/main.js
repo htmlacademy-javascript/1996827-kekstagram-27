@@ -32,51 +32,32 @@ function validateMaxLength(value, maxLength = 100) {
 
 validateMaxLength('ererer', 1);
 
-/*
-Структура каждого объекта должна быть следующей:
-
-id, число — идентификатор опубликованной фотографии. Это число от 1 до 25. Идентификаторы не должны повторяться.
-
-url, строка — адрес картинки вида photos/{{i}}.jpg, где {{i}} — это число от 1 до 25. Адреса картинок не должны повторяться.
-
-description, строка — описание фотографии. Описание придумайте самостоятельно.
-
-likes, число — количество лайков, поставленных фотографии. Случайное число от 15 до 200.
-
-comments, массив объектов — список комментариев, оставленных другими пользователями к этой фотографии. Количество комментариев к каждой фотографии вы определяете на своё усмотрение. Все комментарии генерируются случайным образом. Пример описания объекта с комментарием:
-
-{
-  id: 135,
-  avatar: 'img/avatar-6.svg',
-  message: 'В целом всё неплохо. Но не всё.',
-  name: 'Артём',
-}
-У каждого комментария есть идентификатор — id — случайное число. Идентификаторы не должны повторяться.
-
-Поле avatar — это строка, значение которой формируется по правилу img/avatar-{{случайное число от 1 до 6}}.svg. Аватарки подготовлены в директории img.
-
-Для формирования текста комментария — message — вам необходимо взять одно или два случайных предложения из представленных ниже:
-
-Всё отлично!
-В целом всё неплохо. Но не всё.
-Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.
-Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.
-Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.
-Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!
-Имена авторов также должны быть случайными. Набор имён для комментаторов составьте сами. Подставляйте случайное имя в поле name.
-*/
-
 const ARRAY_MAX_COUNT = 25;
-const GET_COMMENTS_COUNT = 4;
 
-const DESCRIPTION = [
+/**
+ * @type {NumberRange}
+ */
+const COMMENTS_RANGE = [1, 25];
+
+/**
+ * @type {NumberRange}
+ */
+const LIKES_RANGE = [15, 200];
+
+/**
+ * @type {NumberRange}
+ */
+const AVATAR_RANGE = [1, 6];
+
+
+const DESCRIPTIONS = [
   'описание 1',
   'описание 2',
   'описание 3',
   'описание 4',
 ];
 
-const MESSAGE = [
+const MESSAGES = [
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра.',
   'В конце концов это просто непрофессионально.',
   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
@@ -95,53 +76,78 @@ const NAMES = [
 ];
 
 /**
- * Вставляем рандомный неповторяющийся элемент в массив
- * @returns
+ * @template Item
+ * @param {Item[]} items
  */
-function randomRandom () {
-  const arr = [];
-  while (arr.length < ARRAY_MAX_COUNT) {
-    const randomNumber = randomIntInRange(1, ARRAY_MAX_COUNT);
+const getRandomArrayItem = (items) => {
+  const lastIndex = Math.max(0, items.length - 1);
+  const index = randomIntInRange(0, lastIndex);
+
+  return items[index]
+};
+
+const generatedIds = [];
+
+const generateId = () => {
+  while (generatedIds.length < ARRAY_MAX_COUNT) {
+    const id = randomIntInRange(1, ARRAY_MAX_COUNT);
     // вставляем элемент если нет в массиве
-    if (!arr.includes(randomNumber)) {
-      arr.push(randomNumber);
+    if (!generatedIds.includes(id)) {
+      generatedIds.push(id);
+
+      return id;
     }
   }
-  return arr;
 }
 
-const getRandomArrayElement = (elements) => elements[randomIntInRange(1, ARRAY_MAX_COUNT)];
-const getRandomArray = Array.from({length: ARRAY_MAX_COUNT}, () => randomIntInRange(1, ARRAY_MAX_COUNT));
+/**
+ * @returns {CommentState}
+ */
+const generateCommentState = () => ({
+  id: generateId(),
+  avatar: `img/avatar-${randomIntInRange(...AVATAR_RANGE)}.svg`,
+  message: getRandomArrayItem(MESSAGES),
+  name: getRandomArrayItem(NAMES),
+})
 
 /**
- * Создает фото
- * @returns
+ * @param {number} length
+ * @returns {CommentState[]}
  */
-const createFoto = () => ({
-  id: randomRandom(),
-  url: `photos/{${randomIntInRange(1, ARRAY_MAX_COUNT)}}.jpg`,
-  description: DESCRIPTION[randomIntInRange(1, DESCRIPTION.length - 1)],
-  likes: randomIntInRange(15, 200),
-  comments: getComments ()
+const generateCommentStates = (length) => Array.from({length}, generateCommentState);
+
+/**
+ * @returns {ImageState}
+ */
+ const generateImageState = () => ({
+  id: generateId(),
+  url: `photos/${randomIntInRange(1, ARRAY_MAX_COUNT)}.jpg`,
+  description: getRandomArrayItem(DESCRIPTIONS),
+  likes: randomIntInRange(...LIKES_RANGE),
+  comments: generateCommentStates(randomIntInRange(...COMMENTS_RANGE))
 });
 
-/**
- * Создает комментарий
- * @returns
- */
-function getComments () {
-  const comments = [];
-  let commentObj;
-  for (let i = 0; i < GET_COMMENTS_COUNT; i++) {
-    commentObj = {
-      id: getRandomArrayElement(getRandomArray),
-      avatar: `img/avatar-${randomIntInRange(1, 6)}.svg`,
-      message: MESSAGE[randomIntInRange(1, MESSAGE.length - 1)],
-      name: NAMES[randomIntInRange(1, NAMES.length - 1)],
-    };
-    comments.push(commentObj);
-  }
-  return comments;
-}
+const generateImageStates = () => Array.from({length: ARRAY_MAX_COUNT}, generateImageState);
 
-console.log(createFoto());
+generateImageStates();
+
+/**
+ * @typedef ImageState
+ * @prop {number} id
+ * @prop {string} url
+ * @prop {string} description
+ * @prop {number} likes
+ * @prop {CommentState[]} comments
+ */
+
+/**
+ * @typedef CommentState
+ * @prop {number} id
+ * @prop {string} avatar
+ * @prop {string} message
+ * @prop {string} name
+ */
+
+/**
+ * @typedef {[min: number, max: number]} NumberRange
+ */
