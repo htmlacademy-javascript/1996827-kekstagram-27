@@ -83,7 +83,7 @@ const getRandomArrayItem = (items) => {
   const lastIndex = Math.max(0, items.length - 1);
   const index = randomIntInRange(0, lastIndex);
 
-  return items[index]
+  return items[index];
 };
 
 const generatedIds = [];
@@ -98,7 +98,7 @@ const generateId = () => {
       return id;
     }
   }
-}
+};
 
 /**
  * @returns {CommentState}
@@ -108,7 +108,7 @@ const generateCommentState = () => ({
   avatar: `img/avatar-${randomIntInRange(...AVATAR_RANGE)}.svg`,
   message: getRandomArrayItem(MESSAGES),
   name: getRandomArrayItem(NAMES),
-})
+});
 
 /**
  * @param {number} length
@@ -119,7 +119,7 @@ const generateCommentStates = (length) => Array.from({length}, generateCommentSt
 /**
  * @returns {ImageState}
  */
- const generateImageState = () => ({
+const generateImageState = () => ({
   id: generateId(),
   url: `photos/${randomIntInRange(1, ARRAY_MAX_COUNT)}.jpg`,
   description: getRandomArrayItem(DESCRIPTIONS),
