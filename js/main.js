@@ -1,5 +1,3 @@
-// import { name } from "browser-sync";
-
 /**
  * Вернет целое положительное в диапазоне `min`, `max`
  * @param {number} min
@@ -18,8 +16,6 @@ function randomIntInRange(min, max) {
 
   return Math.round((max - min) * Math.random() + min);
 }
-
-// randomIntInRange(4, 3);
 
 /**
  * Проверит максимальную длину строки
