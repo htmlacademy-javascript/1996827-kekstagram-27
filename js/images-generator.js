@@ -1,5 +1,7 @@
 import {generateId, randomIntInRange, getRandomArrayItem} from './utils.js';
 
+// const {generateId, randomIntInRange, getRandomArrayItem} = await import('./utils.js');
+
 import {
   DESCRIPTIONS,
   LIKES_RANGE,
@@ -12,7 +14,7 @@ import {
 /**
  * @returns {CommentState}
  */
- const generateCommentState = () => ({
+const generateCommentState = () => ({
   id: generateId(),
   avatar: `img/avatar-${randomIntInRange(...AVATAR_RANGE)}.svg`,
   message: getRandomArrayItem(MESSAGES),
@@ -41,3 +43,6 @@ const generateImageStates = (length = 25) =>
   Array.from({length}, (_, index) => generateImageState(index + 1));
 
 export default generateImageStates;
+
+
+globalThis.generate = generateImageStates;
