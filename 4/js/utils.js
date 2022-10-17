@@ -3,7 +3,7 @@
  * @param {number} min
  * @param {number} max
  */
-export function randomIntInRange(min, max) {
+export const randomIntInRange = (min, max) => {
   const range = [min, max];
 
   if (!range.every(Number.isInteger)) {
@@ -15,7 +15,7 @@ export function randomIntInRange(min, max) {
   }
 
   return Math.round((max - min) * Math.random() + min);
-}
+};
 
 /**
  * @template Item
@@ -29,27 +29,22 @@ export const getRandomArrayItem = (items) => {
 };
 
 const generatedIds = [];
+
 export const generateId = () => {
-  while (true) {
-    const id = randomIntInRange(1, Number.MAX_SAFE_INTEGER);
-    // вставляем элемент если нет в массиве
-    if (!generatedIds.includes(id)) {
-      generatedIds.push(id);
+  const id = randomIntInRange(1, Number.MAX_SAFE_INTEGER);
 
-      return id;
-    }
+  if (!generatedIds.includes(id)) {
+    generatedIds.push(id);
+
+    return id;
   }
-};
 
-console.log(`test  generateId(): ${generateId()}`);
+  return generateId();
+};
 
 /**
  * Проверит максимальную длину строки
  * @param {string} value
  * @param {number} maxLength По умолчанию 100
  */
-function validateMaxLength(value, maxLength = 100) {
-  return value.length <= maxLength;
-}
-
-validateMaxLength('ererer', 1);
+export const validateMaxLength = (value, maxLength = 100) => value.length <= maxLength;
