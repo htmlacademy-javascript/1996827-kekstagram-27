@@ -1,5 +1,3 @@
-import {ARRAY_MAX_COUNT} from './data.js';
-
 /**
  * Вернет целое положительное в диапазоне `min`, `max`
  * @param {number} min
@@ -32,9 +30,8 @@ export const getRandomArrayItem = (items) => {
 
 const generatedIds = [];
 export const generateId = () => {
-  // while (generatedIds.length < ARRAY_MAX_COUNT) {
-  while (generatedIds.length < ARRAY_MAX_COUNT) {
-    const id = randomIntInRange(1, ARRAY_MAX_COUNT);
+  while (true) {
+    const id = randomIntInRange(1, Number.MAX_SAFE_INTEGER);
     // вставляем элемент если нет в массиве
     if (!generatedIds.includes(id)) {
       generatedIds.push(id);
@@ -44,7 +41,7 @@ export const generateId = () => {
   }
 };
 
-// console.log(`test  generateId(): ${generateId()}`);
+console.log(`test  generateId(): ${generateId()}`);
 
 /**
  * Проверит максимальную длину строки

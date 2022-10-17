@@ -1,9 +1,3 @@
-export const ARRAY_MAX_COUNT = 25;
-
-/**
- * @typedef {[min: number, max: number]} NumberRange
- */
-
 /**
  * @type {NumberRange}
  */

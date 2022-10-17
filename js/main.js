@@ -1,4 +1,4 @@
-import {generateImageStates} from './get-images.js';
+import generateImageStates from './images-generator.js';
 
-// console.log(generateImageStates());
-generateImageStates();
+console.log(generateImageStates());
+// generateImageStates();
