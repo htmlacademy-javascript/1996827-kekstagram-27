@@ -2,7 +2,7 @@
  * Экранирует html-символы
  * @param {string} value
  */
- export const escapeHtml = (value) => {
+export const escapeHtml = (value) => {
   const pattern = /[<>&"']/g;
   const replacement = (match) => `&#${match.codePointAt(0)};`;
 

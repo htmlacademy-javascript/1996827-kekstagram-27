@@ -30,8 +30,8 @@ export default class ImageGallery extends Component {
       <a href="#" class="picture">
         <img class="picture__img" src="${image.url}" width="182" height="182" alt="Случайная фотография">
         <p class="picture__info">
-          <span class="picture__comments"></span>
-          <span class="picture__likes"></span>
+          <span class="picture__comments">${image.comments.length}</span>
+          <span class="picture__likes">${image.likes}</span>
         </p>
       </a>
     `;
@@ -42,9 +42,9 @@ export default class ImageGallery extends Component {
    */
   setContent(images) {
     const imagesHtml = images.map(this.createImageHtml).join(' ');
-
     this.insertAdjacentHTML('beforeend', imagesHtml);
   }
+
 }
 
 customElements.define(String(ImageGallery), ImageGallery);

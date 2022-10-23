@@ -1,7 +1,5 @@
 import {generateId, randomIntInRange, getRandomArrayItem} from './utils.js';
 
-// const {generateId, randomIntInRange, getRandomArrayItem} = await import('./utils.js');
-
 import {
   DESCRIPTIONS,
   LIKES_RANGE,
