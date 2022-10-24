@@ -5,7 +5,15 @@ import UploadArea from './upload-area.js';
 export default class ImageGallery extends Component {
   constructor() {
     super();
+
     this.classList.add('pictures');
+
+    /**
+     * @type {ImageState[]}
+     */
+    this.images = [];
+
+    this.addEventListener('click', this.handleClick);
   }
 
   /**
@@ -27,7 +35,7 @@ export default class ImageGallery extends Component {
    */
   createImageHtml(image) {
     return html`
-      <a href="#" class="picture">
+      <a href="#" class="picture" id="picture-${image.id}">
         <img class="picture__img" src="${image.url}" width="182" height="182" alt="Случайная фотография">
         <p class="picture__info">
           <span class="picture__comments">${image.comments.length}</span>
@@ -42,9 +50,29 @@ export default class ImageGallery extends Component {
    */
   setContent(images) {
     const imagesHtml = images.map(this.createImageHtml).join(' ');
+
     this.insertAdjacentHTML('beforeend', imagesHtml);
+
+    this.images = [...images];
+  }
+
+  /**
+   * @param {MouseEvent & {target: Element}} event
+   */
+  handleClick(event) {
+    const target = event.target.closest('.picture')
+
+    if (target) {
+      event.preventDefault();
+
+      const imageId = Number(target.id.replace('picture-', ''));
+      const detail = this.images.find((image) => image.id === imageId);
+
+      this.dispatchEvent(new CustomEvent('itemclick', {detail}));
+    }
   }
 
 }
 
 customElements.define(String(ImageGallery), ImageGallery);
+

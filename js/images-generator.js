@@ -23,7 +23,7 @@ const generateCommentState = () => ({
  * @param {number} length
  * @returns {CommentState[]}
  */
-const generateCommentStates = (length) => Array.from({length}, generateCommentState);
+export const generateCommentStates = (length) => Array.from({length}, generateCommentState);
 
 
 /**
