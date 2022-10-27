@@ -35,8 +35,8 @@ export default class ImageDiscussion extends Component {
   createCommentHtml(comment) {
     return html`
       <li class="social__comment">
-        <img class="social__picture" src="img/avatar-4.svg" alt="Аватар комментатора фотографии" width="35" height="35">
-        <p class="social__text">Мега фото! Просто обалдеть. Как вам так удалось?</p>
+        <img class="social__picture" src="${comment.avatar}" alt="Аватар комментатора фотографии" width="35" height="35">
+        <p class="social__text">${comment.message}</p>
       </li>
     `;
   }

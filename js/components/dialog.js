@@ -33,6 +33,12 @@ export default class Dialog extends Component {
     }
   }
 
-  // handleEvent();
-
+  /**
+   * @param {KeyboardEvent & {target: Element}} event
+   */
+  handleEvent(event) {
+    if (event.keyCode === 27) {
+      this.display(false);
+    }
+  }
 }

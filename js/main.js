@@ -4,7 +4,6 @@ import generateImageStates from './images-generator.js';
 
 
 const images = generateImageStates();
-console.log(images);
 
 /**
  * @type {ImageGallery}
@@ -20,7 +19,6 @@ const dialog = document.querySelector(String(ImageDialog));
  * @param {CustomEvent<ImageState>} event
  */
 const handleGalleryItemClick = (event) => {
-  console.log(event.detail);
   dialog.setContent(event.detail);
   dialog.display(true);
 };
