@@ -34,10 +34,10 @@ export default class Dialog extends Component {
   }
 
   /**
-   * @param {KeyboardEvent & {target: Element}} event
+   * @param {KeyboardEvent} event
    */
   handleEvent(event) {
-    if (event.keyCode === 27) {
+    if (event.key.startsWith('Esc')) {
       this.display(false);
     }
   }

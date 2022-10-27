@@ -60,7 +60,7 @@ export default class ImageGallery extends Component {
    * @param {MouseEvent & {target: Element}} event
    */
   handleClick(event) {
-    const target = event.target.closest('.picture')
+    const target = event.target.closest('.picture');
 
     if (target) {
       event.preventDefault();
