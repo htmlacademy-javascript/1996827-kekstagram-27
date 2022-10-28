@@ -48,3 +48,13 @@ export const generateId = () => {
  * @param {number} maxLength По умолчанию 100
  */
 export const validateMaxLength = (value, maxLength = 100) => value.length <= maxLength;
+
+/**
+ * @param {Event & {target: Element}} event
+ */
+export const traceEvent = (event) => {
+  const {trace} = console;
+  const targetName = event.target.nodeName.toLowerCase();
+
+  trace(`%c${targetName}::${event.type}`, 'font-size: large');
+};

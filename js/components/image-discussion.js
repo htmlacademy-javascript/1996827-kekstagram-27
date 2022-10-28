@@ -35,7 +35,7 @@ export default class ImageDiscussion extends Component {
   createCommentHtml(comment) {
     return html`
       <li class="social__comment">
-        <img class="social__picture" src="${comment.avatar}" alt="Аватар ${comment.name}." width="35" height="35">
+        <img class="social__picture" src="${comment.avatar}" alt="${comment.name}." width="35" height="35">
         <p class="social__text">${comment.message}</p>
       </li>
     `;
@@ -47,7 +47,7 @@ export default class ImageDiscussion extends Component {
   setContent(comments) {
     const commentsHtml = comments.map(this.createCommentHtml).join(' ');
 
-    this.insertAdjacentHTML('beforeend', commentsHtml);
+    this.querySelector('ul').insertAdjacentHTML('beforeend', commentsHtml);
   }
 }
 
