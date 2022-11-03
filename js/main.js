@@ -12,7 +12,7 @@ const images = generateImageStates();
 const gallery = document.querySelector(String(ImageGallery));
 const {upload} = gallery;
 
-upload.dialog.display(true);
+// upload.dialog.display(true);
 
 /**
  * @type {ImageDialog}
@@ -37,3 +37,6 @@ addEventListener('open', traceEvent, {capture: true});
 addEventListener('close', traceEvent, {capture: true});
 addEventListener('click', traceEvent, {capture: true});
 
+
+dialog.setContent(images[10]);
+dialog.display(true);
