@@ -5,6 +5,15 @@ export default class ImageDiscussion extends Component {
     super();
 
     this.classList.add('social');
+
+    /**
+     * @type {CommentState[]}
+     */
+    this.comments = [];
+    this.commentsTotal = 0;
+    this.commentsLimit = 5;
+
+    this.addEventListener('click', this.handleClick);
   }
 
   /**
@@ -13,7 +22,10 @@ export default class ImageDiscussion extends Component {
   createHtml() {
     return html`
       <!-- Комментарии к изображению -->
-      <div class="social__comment-count">5 из <span class="comments-count">125</span> комментариев</div>
+      <div class="social__comment-count">
+        <span class="comments-count">0</span> из
+        <span class="comments-total">0</span> комментариев
+      </div>
 
       <ul class="social__comments"></ul>
 
@@ -45,10 +57,36 @@ export default class ImageDiscussion extends Component {
    * @param {CommentState[]} comments
    */
   setContent(comments) {
+    this.comments = [...comments];
+    this.commentsTotal = comments.length;
+
+    this.querySelector('ul').innerHTML = '';
+    this.showMore();
+  }
+
+  showMore() {
+    const comments = this.comments.splice(0, this.commentsLimit);
     const commentsHtml = comments.map(this.createCommentHtml).join(' ');
 
     this.querySelector('ul').insertAdjacentHTML('beforeend', commentsHtml);
+
+    this.querySelector('.comments-count').textContent = String(this.commentsTotal - this.comments.length);
+    this.querySelector('.comments-total').textContent = String(this.commentsTotal);
+
+    this.querySelector('.comments-loader').classList.toggle('hidden', !this.comments.length);
+  }
+
+  /**
+   * @param {MouseEvent & {target: Element}} event
+   */
+  handleClick(event) {
+    if (event.target.closest('.comments-loader')) {
+      this.showMore();
+    }
+
   }
 }
 
 customElements.define(String(ImageDiscussion), ImageDiscussion);
+
+

@@ -10,9 +10,6 @@ const images = generateImageStates();
  * @type {ImageGallery}
  */
 const gallery = document.querySelector(String(ImageGallery));
-const {upload} = gallery;
-
-upload.dialog.display(true);
 
 /**
  * @type {ImageDialog}
@@ -28,7 +25,6 @@ const handleGalleryItemClick = (event) => {
 };
 
 gallery.setContent(images);
-
 gallery.addEventListener('itemclick', handleGalleryItemClick);
 
 
@@ -36,4 +32,3 @@ addEventListener('change', traceEvent, {capture: true});
 addEventListener('open', traceEvent, {capture: true});
 addEventListener('close', traceEvent, {capture: true});
 addEventListener('click', traceEvent, {capture: true});
-
