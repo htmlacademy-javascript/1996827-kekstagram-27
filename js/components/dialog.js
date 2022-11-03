@@ -36,10 +36,10 @@ export default class Dialog extends Component {
   }
 
   /**
-   * @param {KeyboardEvent} event
+   * @param {KeyboardEvent & {target: {type?: string}}} event
    */
   handleEvent(event) {
-    if (event.key.startsWith('Esc')) {
+    if (event.key.startsWith('Esc') && !event.target.type?.startsWith('text')) {
       this.display(false);
     }
   }
