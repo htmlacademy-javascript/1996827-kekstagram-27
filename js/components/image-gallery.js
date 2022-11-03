@@ -9,11 +9,17 @@ export default class ImageGallery extends Component {
     this.classList.add('pictures');
 
     /**
+     * @type {UploadArea}
+     */
+    this.upload = this.querySelector(String(UploadArea));
+
+    /**
      * @type {ImageState[]}
      */
     this.images = [];
 
     this.addEventListener('click', this.handleClick);
+
   }
 
   /**

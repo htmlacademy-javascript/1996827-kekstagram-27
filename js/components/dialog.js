@@ -22,6 +22,8 @@ export default class Dialog extends Component {
 
     document.body.classList.toggle('modal-open', flag);
     document.body[flag ? 'addEventListener' : 'removeEventListener' ]('keydown', this);
+
+    this.dispatchEvent(new CustomEvent(flag ? 'open' : 'close'));
   }
 
   /**
