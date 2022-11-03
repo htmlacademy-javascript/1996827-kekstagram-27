@@ -10,7 +10,7 @@ const images = generateImageStates();
  * @type {ImageGallery}
  */
 const gallery = document.querySelector(String(ImageGallery));
-const {upload} = gallery;
+// const {upload} = gallery;
 
 // upload.dialog.display(true);
 
