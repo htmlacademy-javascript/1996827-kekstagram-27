@@ -13,31 +13,30 @@ const addValidator = (name, validator) =>
  */
 const list = (value) => value.split(' ').filter(Boolean);
 
-addValidator('item-pattern', (value, pattern, flag) => {
+addValidator('item-pattern', (value, pattern, flags) => {
   const items = list(value);
-  const regexp = RegExp(pattern, flag);
+  const regexp = new RegExp(pattern, flags);
 
   return items.every((item) => regexp.test(item));
 });
 
-addValidator('item-duplicate', (value) => {
-  const items = list(value);
+addValidator('item-unique', (value) => {
+  const items = list(value).map((item) => item.toLowerCase());
+
   return new Set(items).size === items.length;
 });
 
-addValidator('item-amount', (value) => {
+addValidator('item-limit', (value, limit) => {
   const items = list(value);
-  return items.length <= 5;
+
+  return items.length <= Number(limit);
 });
 
-addValidator('item-length', (value) => {
+addValidator('item-maxlength', (value, maxlength) => {
   const items = list(value);
-  return items.join('').length <= 19;
-});
 
-// TODO: один и тот же хэш-тег не может быть использован дважды;
-// TODO: максимальная длина одного хэш-тега 20 символов, включая решётку;
-// TODO: нельзя указать больше пяти хэш-тегов;
+  return items.every((item) => item.length <= Number(maxlength));
+});
 
 export default class UploadTextFields extends Component {
   constructor() {
@@ -45,7 +44,6 @@ export default class UploadTextFields extends Component {
 
     this.classList.add('text');
   }
-
 
   /**
    * @override
@@ -60,14 +58,14 @@ export default class UploadTextFields extends Component {
           data-pristine-item-pattern="^#[a-zа-яё0-9]+$,i"
           data-pristine-item-pattern-message="С начала #, потом буквы / цифры"
 
-          data-pristine-item-duplicate="^#[a-zа-яё0-9]+$,i"
-          data-pristine-item-duplicate-message="Тэг повторяется"
+          data-pristine-item-unique
+          data-pristine-item-unique-message="Нельзя повторяться"
 
-          data-pristine-item-amount="^#[a-zа-яё0-9]+$,i"
-          data-pristine-item-amount-message="Не больше 5 тэгов"
+          data-pristine-item-limit="5"
+          data-pristine-item-limit-message="Не более \${1} тэгов"
 
-          data-pristine-item-length="^#[a-zа-яё0-9]+$,i"
-          data-pristine-item-length-message="Не больше 20 символов"
+          data-pristine-item-maxlength="20"
+          data-pristine-item-maxlength-message="Не больше \${1} символов на #ХэшТег"
 
           placeholder="#ХэшТег">
       </div>
