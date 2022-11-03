@@ -62,11 +62,6 @@ export default class ImageDiscussion extends Component {
 
     this.querySelector('ul').innerHTML = '';
     this.showMore();
-
-
-    // const commentsHtml = comments.map(this.createCommentHtml).join(' ');
-
-    // this.querySelector('ul').insertAdjacentHTML('beforeend', commentsHtml);
   }
 
   showMore() {
