@@ -18,3 +18,9 @@
 /**
  * @typedef {[min: number, max: number]} NumberRange
  */
+
+ /**
+  * @typedef UploadEffectMenuItem
+  * @prop {string} type
+  * @prop {string} label
+  */

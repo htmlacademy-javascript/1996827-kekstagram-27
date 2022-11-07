@@ -58,3 +58,11 @@ export const traceEvent = (event) => {
 
   trace(`%c${targetName}::${event.type}`, 'font-size: large');
 };
+
+/**
+ * Найдет ключ объекта по значению
+ * @param {Object} target
+ * @param {*} value
+ */
+export const findKey = (target, value) =>
+  Object.keys(target).find((key) => target[key] === value);

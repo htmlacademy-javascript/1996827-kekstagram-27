@@ -37,6 +37,9 @@ const {upload} = gallery;
 upload.dialog.display(true);
 
 // SCALE IMAGE
+/**
+ * @type {HTMLInputElement}
+ */
 const scaleControlValue = document.querySelector('.scale__control--value');
 const scaleControlSmaller = document.querySelector('.scale__control--smaller');
 const scaleControlBigger = document.querySelector('.scale__control--bigger');
@@ -45,6 +48,7 @@ const imgUploadPreview = document.querySelector('.img-upload__preview img');
 const SCALE_MIN = 25;
 const SCALE_MAX = 100;
 const SCALE_STEP = 25;
+
 
 let scale = 100;
 scaleControlValue.value = `${scale}%`;
@@ -143,9 +147,9 @@ let currentEffect;
 sliderContainer.classList.add('hidden');
 
 const EffectChange = (event) => {
-  scale = 100;
-  scaleControlValue.value = `${scale}%`;
-  imgUploadPreview.style.transform = `scale(${scale / 100})`;
+  // scale = 100;
+  // scaleControlValue.value = `${scale}%`;
+  // imgUploadPreview.style.transform = `scale(${scale / 100})`;
 
 
   imgUploadPreview.classList.remove(`effects__preview--${currentEffect}`);

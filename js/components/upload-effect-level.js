@@ -1,10 +1,36 @@
+import { UploadEffectRange, UploadEffectType } from '../enums.js';
+import { findKey } from '../utils.js';
 import Component, {html} from './component.js';
+
+
+/**
+ * @param {string} type
+ */
+const createRangeOptions = (type) => {
+  const range = UploadEffectRange[findKey(UploadEffectType, type)];
+  const [min, max, step] = range;
+
+  return {
+    range: {min, max},
+    start: max,
+    step
+  };
+}
 
 export default class UploadEffectLevel extends Component {
   constructor() {
     super();
 
     this.classList.add('effect-level');
+
+    this.input = this.querySelector('input')
+
+    // @ts-ignore
+    this.slider = noUiSlider.create(this.querySelector('div'), {
+      connect: 'lower',
+      behaviour: 'snap',
+      ...createRangeOptions(UploadEffectType.NONE)
+    });
   }
 
   /**
@@ -16,6 +42,20 @@ export default class UploadEffectLevel extends Component {
       <div class="effect-level__slider"></div>
     `;
   }
+
+  /**
+   * @param {number} value
+   */
+  set(value) {
+    this.input.value = String(value);
+    this.slider.set(value);
+  }
+
+
+  get() {
+
+  }
 }
 
 customElements.define(String(UploadEffectLevel), UploadEffectLevel);
+
