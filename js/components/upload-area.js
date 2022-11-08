@@ -56,6 +56,17 @@ export default class UploadArea extends Component {
     `;
   }
 
+
+  reset() {
+    this.form.reset();
+    this.validator.reset();
+
+    requestAnimationFrame(() => {
+      this.dialog.reset();
+    });
+  }
+
+
   /**
    * @param {Event & {target: HTMLInputElement}} event
    */
@@ -67,7 +78,7 @@ export default class UploadArea extends Component {
   }
 
   handleClose() {
-    this.form.reset();
+    this.reset();
   }
 
   /**

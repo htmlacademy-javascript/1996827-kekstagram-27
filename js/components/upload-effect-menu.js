@@ -1,10 +1,19 @@
 import Component, {html} from './component.js';
+import {UploadEffectLabel, UploadEffectType} from '../enums.js';
+
+const items = Object.keys(UploadEffectType).map((key) => ({
+  type: UploadEffectType[key],
+  label: UploadEffectLabel[key]
+}));
 
 export default class UploadEffectMenu extends Component {
   constructor() {
     super();
 
     this.classList.add('effects');
+
+    this.querySelector('ul').innerHTML = items.map(this.createItemHtml).join('');
+    this.reset();
   }
 
   /**
@@ -12,51 +21,49 @@ export default class UploadEffectMenu extends Component {
    */
   createHtml() {
     return html`
-      <ul class="effects__list">
-        <li class="effects__item">
-          <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-none" value="none" checked>
-          <label for="effect-none" class="effects__label">
-            <span class="effects__preview  effects__preview--none">Превью фото без эффекта</span>
-            Оригинал
-          </label>
-        </li>
-        <li class="effects__item">
-          <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-chrome" value="chrome">
-          <label for="effect-chrome" class="effects__label">
-            <span class="effects__preview  effects__preview--chrome">Превью эффекта Хром</span>
-            Хром
-          </label>
-        </li>
-        <li class="effects__item">
-          <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-sepia" value="sepia">
-          <label for="effect-sepia" class="effects__label">
-            <span class="effects__preview  effects__preview--sepia">Превью эффекта Сепия</span>
-            Сепия
-          </label>
-        </li>
-        <li class="effects__item">
-          <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-marvin" value="marvin">
-          <label for="effect-marvin" class="effects__label">
-            <span class="effects__preview  effects__preview--marvin">Превью эффекта Марвин</span>
-            Марвин
-          </label>
-        </li>
-        <li class="effects__item">
-          <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-phobos" value="phobos">
-          <label for="effect-phobos" class="effects__label">
-            <span class="effects__preview  effects__preview--phobos">Превью эффекта Фобос</span>
-            Фобос
-          </label>
-        </li>
-        <li class="effects__item">
-          <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-heat" value="heat">
-          <label for="effect-heat" class="effects__label">
-            <span class="effects__preview  effects__preview--heat">Превью эффекта Зной</span>
-            Зной
-          </label>
-        </li>
-      </ul>
+      <ul class="effects__list"></ul>
     `;
+  }
+
+  /**
+   * @param {UploadEffectMenuItem} item
+   */
+  createItemHtml(item) {
+    return html`
+      <li class="effects__item">
+        <input
+          class="effects__radio  visually-hidden"
+          id="effect-${item.type}"
+          type="radio"
+          name="effect"
+          value="${item.type}">
+        <label class="effects__label" for="effect-${item.type}">
+          <span class="effects__preview  effects__preview--${item.type}">
+            Превью эффекта ${item.label}
+          </span>
+          ${item.label}
+        </label>
+      </li>
+    `;
+  }
+
+  getSelectedValue() {
+    /**
+     * @type {HTMLInputElement}
+     */
+    const radio = this.querySelector(':checked');
+
+    return radio?.value;
+  }
+
+  reset() {
+    /**
+     * @type {HTMLInputElement}
+     */
+    const radio = this.querySelector(`#effect-${UploadEffectType.NONE}`);
+
+    radio.checked = true;
+    radio.dispatchEvent(new Event('change', {bubbles: true}));
   }
 }
 

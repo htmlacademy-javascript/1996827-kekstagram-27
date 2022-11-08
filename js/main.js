@@ -1,7 +1,7 @@
 import ImageDialog from './components/image-dialog.js';
 import ImageGallery from './components/image-gallery.js';
 import generateImageStates from './images-generator.js';
-import { traceEvent } from './utils.js';
+import {traceEvent} from './utils.js';
 
 
 const images = generateImageStates();
@@ -32,3 +32,6 @@ addEventListener('change', traceEvent, {capture: true});
 addEventListener('open', traceEvent, {capture: true});
 addEventListener('close', traceEvent, {capture: true});
 addEventListener('click', traceEvent, {capture: true});
+
+// const {upload} = gallery;
+// upload.dialog.display(true);
