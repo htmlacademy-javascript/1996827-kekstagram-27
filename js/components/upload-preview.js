@@ -1,6 +1,6 @@
 import Component, {html} from './component.js';
 import {UploadEffectType, UploadEffectCssFilter} from '../enums.js';
-import { findKey } from '../utils.js';
+import {findKey} from '../utils.js';
 
 
 export default class UploadPreview extends Component {

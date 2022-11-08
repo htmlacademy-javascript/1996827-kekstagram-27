@@ -1,5 +1,5 @@
-import { UploadEffectRange, UploadEffectType } from '../enums.js';
-import { findKey } from '../utils.js';
+import {UploadEffectRange, UploadEffectType} from '../enums.js';
+import {findKey} from '../utils.js';
 import Component, {html} from './component.js';
 
 
