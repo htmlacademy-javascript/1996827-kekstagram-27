@@ -1,7 +1,7 @@
 import ImageDialog from './components/image-dialog.js';
 import ImageGallery from './components/image-gallery.js';
 import generateImageStates from './images-generator.js';
-import { traceEvent } from './utils.js';
+import {traceEvent} from './utils.js';
 
 
 const images = generateImageStates();
