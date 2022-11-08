@@ -6,9 +6,6 @@ const items = Object.keys(UploadEffectType).map((key) => ({
   label: UploadEffectLabel[key]
 }));
 
-console.log(items);
-console.log(Object.keys(UploadEffectType));
-
 export default class UploadEffectMenu extends Component {
   constructor() {
     super();
@@ -16,6 +13,7 @@ export default class UploadEffectMenu extends Component {
     this.classList.add('effects');
 
     this.querySelector('ul').innerHTML = items.map(this.createItemHtml).join('');
+    this.reset();
   }
 
   /**
@@ -56,6 +54,16 @@ export default class UploadEffectMenu extends Component {
     const radio = this.querySelector(':checked');
 
     return radio?.value;
+  }
+
+  reset() {
+    /**
+     * @type {HTMLInputElement}
+     */
+    const radio = this.querySelector(`#effect-${UploadEffectType.NONE}`);
+
+    radio.checked = true;
+    radio.dispatchEvent(new Event('change', {bubbles: true}));
   }
 }
 

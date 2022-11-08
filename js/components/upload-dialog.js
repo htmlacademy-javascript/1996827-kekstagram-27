@@ -5,12 +5,37 @@ import UploadEffectLevel from './upload-effect-level.js';
 import UploadEffectMenu from './upload-effect-menu.js';
 import UploadTextFields from './upload-text-fields.js';
 
-
 export default class UploadDialog extends Dialog {
   constructor() {
     super();
 
-    // this.classList.add('');
+    /**
+     * @type {UploadScale}
+     */
+    this.scale = this.querySelector(String(UploadScale));
+    this.scale.addEventListener('update', this.handleScaleUpdate.bind(this));
+
+    /**
+     * @type {UploadPreview}
+     */
+    this.preview = this.querySelector(String(UploadPreview));
+
+    /**
+     * @type {UploadEffectLevel}
+     */
+    this.effectLevel = this.querySelector(String(UploadEffectLevel));
+    this.effectLevel.addEventListener('update', this.handleEffectLevelUpdate.bind(this));
+
+    /**
+     * @type {UploadEffectMenu}
+     */
+    this.effectMenu = this.querySelector(String(UploadEffectMenu));
+    this.effectMenu.addEventListener('change', this.handleEffectMenuChange.bind(this));
+
+    /**
+     * @type {HTMLButtonElement}
+     */
+    this.saveButton = this.querySelector('#upload-submit');
   }
 
   /**
@@ -45,6 +70,27 @@ export default class UploadDialog extends Dialog {
       </div>
     `;
   }
+
+  reset() {
+    this.scale.reset();
+    this.effectMenu.reset();
+  }
+
+  handleScaleUpdate() {
+    this.preview.setScale(this.scale.value);
+  }
+
+  handleEffectLevelUpdate() {
+    this.preview.setEffectLevel(this.effectLevel.get());
+  }
+
+  handleEffectMenuChange() {
+    const type = this.effectMenu.getSelectedValue();
+
+    this.preview.setEffect(type);
+    this.effectLevel.preset(type);
+  }
+
 }
 
 customElements.define(String(UploadDialog), UploadDialog);

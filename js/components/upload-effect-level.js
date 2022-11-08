@@ -15,7 +15,7 @@ const createRangeOptions = (type) => {
     start: max,
     step
   };
-}
+};
 
 export default class UploadEffectLevel extends Component {
   constructor() {
@@ -23,7 +23,7 @@ export default class UploadEffectLevel extends Component {
 
     this.classList.add('effect-level');
 
-    this.input = this.querySelector('input')
+    this.input = this.querySelector('input');
 
     // @ts-ignore
     this.slider = noUiSlider.create(this.querySelector('div'), {
@@ -31,6 +31,8 @@ export default class UploadEffectLevel extends Component {
       behaviour: 'snap',
       ...createRangeOptions(UploadEffectType.NONE)
     });
+
+    this.slider.on('update', this.handleSliderUpdate.bind(this));
   }
 
   /**
@@ -51,9 +53,24 @@ export default class UploadEffectLevel extends Component {
     this.slider.set(value);
   }
 
-
+  /**
+   * @return {number}
+   */
   get() {
+    return this.slider.get(true);
+  }
 
+  /**
+   * @param {string} type
+   */
+  preset(type) {
+    this.slider.updateOptions(createRangeOptions(type));
+
+    this.display(type !== UploadEffectType.NONE);
+  }
+
+  handleSliderUpdate() {
+    this.dispatchEvent(new CustomEvent('update'));
   }
 }
 
