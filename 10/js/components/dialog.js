@@ -2,6 +2,9 @@ import Component from './component.js';
 
 export * from './component.js';
 
+/**
+ * @implements {EventListenerObject}
+ */
 export default class Dialog extends Component {
   constructor() {
     super();
