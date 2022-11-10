@@ -1,5 +1,8 @@
 import Component, {html} from './component.js';
 
+/**
+ * @implements {EventListenerObject}
+ */
 export default class StatusMessage extends Component {
   /**
    * @param {StatusMessageContent} content
