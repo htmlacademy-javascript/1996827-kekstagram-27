@@ -1,0 +1,63 @@
+html {
+  scrollbar-gutter: stable;
+}
+
+image-gallery:not(:defined) {
+  align-items: center;
+  display: flex;
+  height: 639px;
+  justify-content: center;
+}
+
+image-gallery:not(:defined)::before {
+  content: "Подготовка...";
+}
+
+image-dialog {
+  padding: 60px 0;
+  scrollbar-gutter: stable;
+}
+
+upload-effect-menu {
+  display: block;
+}
+
+.text {
+  display: block;
+}
+
+.text__field {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.text__hashtags {
+  margin-bottom: 0;
+}
+
+.text__description {
+  margin-top: 20px;
+  resize: vertical;
+}
+
+.text__error {
+  animation: reveal 200ms;
+  background-color: hsl(0 0% 0% / .85);
+  border-radius: 5px;
+  box-shadow: 0 0 5px hsl(0 0% 0% / .95);
+  font-weight: bold;
+  padding: 10px 15px;
+  position: absolute;
+  text-transform: none;
+  top: 100%;
+  z-index: 1;
+}
+
+.error__description:not(:empty) {
+  line-height: 1.5;
+  margin: 0 0 50px;
+  text-align: start;
+  text-transform: none;
+  white-space: pre-wrap;
+}
