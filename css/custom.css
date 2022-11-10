@@ -53,3 +53,11 @@ upload-effect-menu {
   top: 100%;
   z-index: 1;
 }
+
+.error__description:not(:empty) {
+  line-height: 1.5;
+  margin: 0 0 50px;
+  text-align: start;
+  text-transform: none;
+  white-space: pre-wrap;
+}

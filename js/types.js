@@ -24,3 +24,11 @@
  * @prop {string} type
  * @prop {string} label
  */
+
+/**
+ * @typedef StatusMessageContent
+ * @prop {string} type
+ * @prop {string} title
+ * @prop {string} [description]
+ * @prop {string} action
+ */

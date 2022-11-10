@@ -66,3 +66,20 @@ export const traceEvent = (event) => {
  */
 export const findKey = (target, value) =>
   Object.keys(target).find((key) => target[key] === value);
+
+/**
+ * Отправит запрос на сервер
+ * @param {string} url
+ * @param {RequestInit} [options]
+ */
+export const request = (url, options) => fetch(url, options).then((response) => {
+  if (!response.ok) {
+    throw new Error(`${response.status} - ${response.statusText}`);
+  }
+
+  if (response.headers.get('content-type').startsWith('application/json')) {
+    return response.json();
+  }
+
+  return response.text();
+});

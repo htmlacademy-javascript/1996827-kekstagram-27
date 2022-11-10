@@ -31,8 +31,8 @@ export default class ImageDialog extends Dialog {
         <${ImageDiscussion} class="big-picture__social">
           <div class="social__header">
             <img class="social__picture" src="img/avatar-1.svg" alt="Аватар автора фотографии" width="35" height="35">
-            <p class="social__caption">Тестим новую камеру! =)</p>
-            <p class="social__likes">Нравится <span class="likes-count">356</span></p>
+            <p class="social__caption"></p>
+            <p class="social__likes">Нравится <span class="likes-count">0</span></p>
           </div>
         </${ImageDiscussion}>
 

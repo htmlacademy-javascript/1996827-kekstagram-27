@@ -95,7 +95,7 @@ export default class UploadArea extends Component {
       return;
     }
 
-    // триггер события formdate
+    // триггер события 'formdata'
     new FormData(this.form);
   }
 }

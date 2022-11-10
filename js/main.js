@@ -1,15 +1,21 @@
 import ImageDialog from './components/image-dialog.js';
 import ImageGallery from './components/image-gallery.js';
-import generateImageStates from './images-generator.js';
-import {traceEvent} from './utils.js';
+import StatusMessage from './components/status-message.js';
+// import generateImageStates from './images-generator.js';
+import {request, traceEvent} from './utils.js';
 
+// const images = generateImageStates();
 
-const images = generateImageStates();
+const BASE_URL = 'https://27.javascript.pages.academy/kekstagram';
+const IMAGES_URL = `${BASE_URL}/data`;
+
 
 /**
  * @type {ImageGallery}
  */
 const gallery = document.querySelector(String(ImageGallery));
+
+const {upload} = gallery;
 
 /**
  * @type {ImageDialog}
@@ -24,8 +30,54 @@ const handleGalleryItemClick = (event) => {
   dialog.display(true);
 };
 
-gallery.setContent(images);
-gallery.addEventListener('itemclick', handleGalleryItemClick);
+/**
+ * @param {FormDataEvent} event
+ */
+const handleUploadFormData = (event) => {
+  request(BASE_URL, {
+    method: 'POST',
+    body: event.formData
+  })
+
+    .then(() => {
+      upload.dialog.display(false);
+
+      new StatusMessage({
+        type: 'success',
+        title: 'Изображение успешно загружено',
+        action: 'Круто!'
+      });
+    })
+
+    .catch(() => {
+      new StatusMessage({
+        type: 'error',
+        title: 'Ошибка загрузки файла',
+        action: 'Попробовать ещё раз'
+      });
+    });
+};
+
+
+request(IMAGES_URL)
+
+  .then((images) => {
+    gallery.setContent(images);
+    gallery.addEventListener('itemclick', handleGalleryItemClick);
+  })
+
+  .catch((error) => {
+    new StatusMessage({
+      type: 'error',
+      title: 'Ошибка',
+      description: error.stack,
+      action: 'Закрыть'
+    });
+  })
+
+  .then(() => {
+    upload.addEventListener('formdata', handleUploadFormData);
+  });
 
 
 addEventListener('change', traceEvent, {capture: true});

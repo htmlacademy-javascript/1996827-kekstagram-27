@@ -41,7 +41,7 @@ export default class UploadScale extends Component {
   createHtml() {
     return html`
       <button type="button" class="scale__control  scale__control--smaller">Уменьшить</button>
-      <input type="text" class="scale__control  scale__control--value" value="55%" title="Image Scale" name="scale" readonly>
+      <input type="text" class="scale__control  scale__control--value" value="" title="Image Scale" name="scale" readonly>
       <button type="button" class="scale__control  scale__control--bigger">Увеличить</button>
     `;
   }
