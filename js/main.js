@@ -1,8 +1,10 @@
 import ImageDialog from './components/image-dialog.js';
 import ImageGallery from './components/image-gallery.js';
+import ImageSortMenu from './components/image-sort-menu.js';
 import StatusMessage from './components/status-message.js';
 // import generateImageStates from './images-generator.js';
 import {request, traceEvent} from './utils.js';
+
 
 // const images = generateImageStates();
 
@@ -56,6 +58,9 @@ const handleUploadFormData = (event) => {
         action: 'Попробовать ещё раз'
       });
     });
+
+  document.querySelector('.img-filters--inactive').classList.remove('img-filters--inactive');
+
 };
 
 
@@ -64,6 +69,9 @@ request(IMAGES_URL)
   .then((images) => {
     gallery.setContent(images);
     gallery.addEventListener('itemclick', handleGalleryItemClick);
+
+    // for random
+    // gallery.setContent(images.slice(0, 10).sort(() => Math.random() - 0.5));
   })
 
   .catch((error) => {
@@ -87,3 +95,18 @@ addEventListener('click', traceEvent, {capture: true});
 
 // const {upload} = gallery;
 // upload.dialog.display(true);
+
+
+// document.querySelector('#filter-default').addEventListener('click', () => {
+//   console.log('default');
+// });
+
+// document.querySelector('#filter-random').addEventListener('click', () => {
+//   console.log('random');
+// });
+
+// document.querySelector('#filter-discussed').addEventListener('click', () => {
+//   console.log('discussed');
+// });
+
+
