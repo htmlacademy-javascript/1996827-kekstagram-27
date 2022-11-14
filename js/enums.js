@@ -1,3 +1,27 @@
+export const ImageSortType = {
+  DEFAULT: 'default',
+  RANDOM: 'random',
+  DISCUSSED: 'discussed'
+};
+
+export const ImageSortLabel = {
+  DEFAULT: 'По умолчанию',
+  RANDOM: 'Случайные',
+  DISCUSSED: 'Обсуждаемые'
+};
+
+export const ImageSortCompare = {
+  DEFAULT: () => 0,
+  RANDOM: () => Math.random() - .5,
+  DISCUSSED: (image, nextimage) => nextimage.comments.length - image.comments.length
+};
+
+export const ImageSortLimit = {
+  DEFAULT: Infinity,
+  RANDOM: 10,
+  DISCUSSED: Infinity
+};
+
 export const UploadEffectType = {
   NONE: 'none',
   CHROME: 'chrome',
@@ -33,3 +57,4 @@ export const UploadEffectRange = {
   PHOBOS: [0, 3, .1],
   HEAT: [1, 3, .1]
 };
+

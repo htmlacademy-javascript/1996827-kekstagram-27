@@ -20,6 +20,12 @@
  */
 
 /**
+ * @typedef ImageSortMenuItem
+ * @prop {string} type
+ * @prop {string} label
+ */
+
+/**
  * @typedef UploadEffectMenuItem
  * @prop {string} type
  * @prop {string} label
@@ -32,3 +38,4 @@
  * @prop {string} [description]
  * @prop {string} action
  */
+
