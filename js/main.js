@@ -110,3 +110,18 @@ addEventListener('click', traceEvent, {capture: true});
 // });
 
 
+/**
+ * @type {*}
+ */
+const uploadImgElement = document.querySelector('#upload-file');
+
+/**
+ * @type {*}
+ */
+const previewImageElement = document.querySelector('.img-upload__preview img');
+
+uploadImgElement.addEventListener('change', () => {
+  const file = uploadImgElement.files[0];
+  previewImageElement.src = URL.createObjectURL(file);
+});
+
