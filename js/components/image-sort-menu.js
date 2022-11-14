@@ -15,7 +15,8 @@ export default class ImageSortMenu extends Component {
 
     this.querySelector('.img-filters__button').classList.add('img-filters__button--active');
 
-    this.querySelector('button').addEventListener('click', this.handleButtonFilterClick);
+    // this.querySelector('button').addEventListener('click', this.handleButtonFilterClick);
+    document.addEventListener('click', this.handleButtonFilterClick);
   }
 
   /**
@@ -31,14 +32,16 @@ export default class ImageSortMenu extends Component {
   /**
    * @param {ImageSortMenuItem} item
    */
-   createItemHtml(item) {
+  createItemHtml(item) {
     return html`
         <button type=button class="img-filters__button  " id="filter-${item.type}">${item.label}</button>
     `;
   }
 
-  handleButtonFilterClick() {
-    console.log(this.id);
+  handleButtonFilterClick(event) {
+    if (event.target.classList.contains('img-filters__button')) {
+      console.log(event.target.id);
+    }
   }
 }
 
