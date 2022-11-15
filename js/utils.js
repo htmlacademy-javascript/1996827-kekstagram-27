@@ -84,9 +84,11 @@ export const request = (url, options) => fetch(url, options).then((response) => 
   return response.text();
 });
 
-// Функция взята из интернета и доработана
-// Источник - https://www.freecodecamp.org/news/javascript-debounce-example
-function debounce (callback, timeoutDelay = 500) {
+/**
+ * Ограничит частоту вызова `callback`
+ * @param {Function} callback
+ * @param {number} maxFreq
+ */
   // Используем замыкания, чтобы id таймаута у нас навсегда приклеился
   // к возвращаемой функции с setTimeout, тогда мы его сможем перезаписывать
   let timeoutId;
