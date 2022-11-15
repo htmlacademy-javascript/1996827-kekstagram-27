@@ -1,5 +1,6 @@
 import Component, {html} from './component.js';
 
+
 /**
  * @implements {EventListenerObject}
  */
@@ -20,6 +21,7 @@ export default class StatusMessage extends Component {
     this.addEventListener('click', this.handleClick);
   }
 
+
   /**
    * @override
    * @param {StatusMessageContent} content
@@ -34,14 +36,17 @@ export default class StatusMessage extends Component {
     `;
   }
 
+
   display(flag) {
     document.body[flag ? 'append' : 'removeChild' ](this);
     document.body[flag ? 'addEventListener' : 'removeEventListener' ]('keydown', this, {capture: true});
   }
 
+
   handleClick() {
     this.display(false);
   }
+
 
   /**
    * @param {KeyboardEvent} event
@@ -54,5 +59,6 @@ export default class StatusMessage extends Component {
     }
   }
 }
+
 
 customElements.define(String(StatusMessage), StatusMessage);

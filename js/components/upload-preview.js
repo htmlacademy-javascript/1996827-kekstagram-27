@@ -12,6 +12,7 @@ export default class UploadPreview extends Component {
     this.currentFilter = UploadEffectType.NONE;
   }
 
+
   /**
    * @override
    */
@@ -21,12 +22,14 @@ export default class UploadPreview extends Component {
     `;
   }
 
+
   /**
    * @param {number} percent
    */
   setScale(percent) {
     this.image.style.transform = `scale(${percent / 100})`;
   }
+
 
   /**
    * @param {string} type
@@ -37,12 +40,14 @@ export default class UploadPreview extends Component {
     this.currentFilter = UploadEffectCssFilter[findKey(UploadEffectType, type)];
   }
 
+
   /**
    * @param {number} level
    */
   setEffectLevel(level) {
     this.image.style.filter = this.currentFilter.replace('0', String(level));
   }
+
 
   /**
    * @param {string} url
@@ -51,5 +56,6 @@ export default class UploadPreview extends Component {
     this.image.src = url;
   }
 }
+
 
 customElements.define(String(UploadPreview), UploadPreview);

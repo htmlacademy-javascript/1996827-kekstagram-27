@@ -5,6 +5,7 @@ import UploadEffectLevel from './upload-effect-level.js';
 import UploadEffectMenu from './upload-effect-menu.js';
 import UploadTextFields from './upload-text-fields.js';
 
+
 export default class UploadDialog extends Dialog {
   constructor() {
     super();
@@ -37,6 +38,7 @@ export default class UploadDialog extends Dialog {
      */
     this.saveButton = this.querySelector('#upload-submit');
   }
+
 
   /**
    * @override
@@ -71,6 +73,7 @@ export default class UploadDialog extends Dialog {
     `;
   }
 
+
   /**
    * @param {string} url
    */
@@ -79,18 +82,22 @@ export default class UploadDialog extends Dialog {
     this.effectMenu.setImageUrl(url);
   }
 
+
   reset() {
     this.scale.reset();
     this.effectMenu.reset();
   }
 
+
   handleScaleUpdate() {
     this.preview.setScale(this.scale.value);
   }
 
+
   handleEffectLevelUpdate() {
     this.preview.setEffectLevel(this.effectLevel.get());
   }
+
 
   handleEffectMenuChange() {
     const type = this.effectMenu.getSelectedValue();
@@ -98,7 +105,7 @@ export default class UploadDialog extends Dialog {
     this.preview.setEffect(type);
     this.effectLevel.preset(type);
   }
-
 }
+
 
 customElements.define(String(UploadDialog), UploadDialog);

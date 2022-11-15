@@ -1,6 +1,7 @@
 import {ImageSortLabel, ImageSortType} from '../enums.js';
 import Component, {html} from './component.js';
 
+
 const items = Object.keys(ImageSortType).map((key) => ({
   type: ImageSortType[key],
   label: ImageSortLabel[key]
@@ -27,6 +28,7 @@ export default class ImageSortMenu extends Component {
     `;
   }
 
+
   /**
    * @param {ImageSortMenuItem} item
    */
@@ -36,6 +38,7 @@ export default class ImageSortMenu extends Component {
     `;
   }
 
+
   getSelectedValue() {
     /**
      * @type {HTMLButtonElement}
@@ -44,6 +47,7 @@ export default class ImageSortMenu extends Component {
 
     return item?.value;
   }
+
 
   /**
    * @param {string} value
@@ -60,6 +64,7 @@ export default class ImageSortMenu extends Component {
     }
   }
 
+
   /**
    * @param {MouseEvent & {target: HTMLButtonElement}} event
    */
@@ -74,5 +79,6 @@ export default class ImageSortMenu extends Component {
     }
   }
 }
+
 
 customElements.define(String(ImageSortMenu), ImageSortMenu);

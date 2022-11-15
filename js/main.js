@@ -6,6 +6,7 @@ import {ImageSortCompare, ImageSortLimit, ImageSortType} from './enums.js';
 // import generateImageStates from './images-generator.js';
 import {findKey, request, traceEvent, debounce} from './utils.js';
 
+
 // const images = generateImageStates();
 
 const BASE_URL = 'https://27.javascript.pages.academy/kekstagram';
@@ -72,8 +73,6 @@ const handleUploadFormData = (event) => {
         action: 'Попробовать ещё раз'
       });
     });
-
-
 };
 
 
@@ -108,33 +107,3 @@ addEventListener('click', traceEvent, {capture: true});
 
 // const {upload} = gallery;
 // upload.dialog.display(true);
-
-
-// document.querySelector('#filter-default').addEventListener('click', () => {
-//   console.log('default');
-// });
-
-// document.querySelector('#filter-random').addEventListener('click', () => {
-//   console.log('random');
-// });
-
-// document.querySelector('#filter-discussed').addEventListener('click', () => {
-//   console.log('discussed');
-// });
-
-
-// /**
-//  * @type {*}
-//  */
-// const uploadImgElement = document.querySelector('#upload-file');
-
-// /**
-//  * @type {*}
-//  */
-// const previewImageElement = document.querySelector('.img-upload__preview img');
-
-// uploadImgElement.addEventListener('change', () => {
-//   const file = uploadImgElement.files[0];
-//   previewImageElement.src = URL.createObjectURL(file);
-// });
-

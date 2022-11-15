@@ -79,9 +79,11 @@ export default class UploadArea extends Component {
     }
   }
 
+
   handleClose() {
     this.reset();
   }
+
 
   /**
    * @param {SubmitEvent} event
@@ -101,5 +103,6 @@ export default class UploadArea extends Component {
     new FormData(this.form);
   }
 }
+
 
 customElements.define(String(UploadArea), UploadArea);

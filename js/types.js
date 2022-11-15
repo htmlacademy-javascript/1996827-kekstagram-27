@@ -38,4 +38,3 @@
  * @prop {string} [description]
  * @prop {string} action
  */
-

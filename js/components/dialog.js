@@ -2,6 +2,7 @@ import Component from './component.js';
 
 export * from './component.js';
 
+
 /**
  * @implements {EventListenerObject}
  */
@@ -16,6 +17,7 @@ export default class Dialog extends Component {
     this.addEventListener('click', this.handleClick);
   }
 
+
   /**
    * @override
    * @param {boolean} flag
@@ -29,6 +31,7 @@ export default class Dialog extends Component {
     this.dispatchEvent(new CustomEvent(flag ? 'open' : 'close'));
   }
 
+
   /**
    * @param {MouseEvent & {target: Element}} event
    */
@@ -37,6 +40,7 @@ export default class Dialog extends Component {
       this.display(false);
     }
   }
+
 
   /**
    * @param {KeyboardEvent & {target: {type?: string}}} event
