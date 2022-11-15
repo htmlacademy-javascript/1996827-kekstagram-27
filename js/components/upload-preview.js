@@ -43,6 +43,13 @@ export default class UploadPreview extends Component {
   setEffectLevel(level) {
     this.image.style.filter = this.currentFilter.replace('0', String(level));
   }
+
+  /**
+   * @param {string} url
+   */
+  setUrl(url) {
+    this.image.src = url;
+  }
 }
 
 customElements.define(String(UploadPreview), UploadPreview);

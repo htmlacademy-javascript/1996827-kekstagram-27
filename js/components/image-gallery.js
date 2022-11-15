@@ -57,6 +57,7 @@ export default class ImageGallery extends Component {
   setContent(images) {
     const imagesHtml = images.map(this.createImageHtml).join(' ');
 
+    this.querySelectorAll('.picture').forEach((item) => item.remove());
     this.insertAdjacentHTML('beforeend', imagesHtml);
 
     this.images = [...images];

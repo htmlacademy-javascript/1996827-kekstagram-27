@@ -71,6 +71,14 @@ export default class UploadDialog extends Dialog {
     `;
   }
 
+  /**
+   * @param {string} url
+   */
+  setImageUrl(url) {
+    this.preview.setUrl(url);
+    this.effectMenu.setImageUrl(url);
+  }
+
   reset() {
     this.scale.reset();
     this.effectMenu.reset();

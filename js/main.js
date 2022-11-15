@@ -2,15 +2,19 @@ import ImageDialog from './components/image-dialog.js';
 import ImageGallery from './components/image-gallery.js';
 import ImageSortMenu from './components/image-sort-menu.js';
 import StatusMessage from './components/status-message.js';
+import {ImageSortCompare, ImageSortLimit, ImageSortType} from './enums.js';
 // import generateImageStates from './images-generator.js';
-import {request, traceEvent} from './utils.js';
-
+import {findKey, request, traceEvent, debounce} from './utils.js';
 
 // const images = generateImageStates();
 
 const BASE_URL = 'https://27.javascript.pages.academy/kekstagram';
 const IMAGES_URL = `${BASE_URL}/data`;
 
+/**
+ * @type {ImageSortMenu}
+ */
+const menu = document.querySelector(String(ImageSortMenu));
 
 /**
  * @type {ImageGallery}
@@ -23,6 +27,16 @@ const {upload} = gallery;
  * @type {ImageDialog}
  */
 const dialog = document.querySelector(String(ImageDialog));
+
+/**
+ * @param {ImageState[]} images
+ */
+const createMenuChangeHandler = (images) => debounce(() => {
+  const key = findKey(ImageSortType, menu.getSelectedValue());
+  const newImages = [...images].sort(ImageSortCompare[key]).slice(0, ImageSortLimit[key]);
+
+  gallery.setContent(newImages);
+});
 
 /**
  * @param {CustomEvent<ImageState>} event
@@ -59,7 +73,6 @@ const handleUploadFormData = (event) => {
       });
     });
 
-  document.querySelector('.img-filters--inactive').classList.remove('img-filters--inactive');
 
 };
 
@@ -67,11 +80,11 @@ const handleUploadFormData = (event) => {
 request(IMAGES_URL)
 
   .then((images) => {
-    gallery.setContent(images);
-    gallery.addEventListener('itemclick', handleGalleryItemClick);
+    menu.addEventListener('change', createMenuChangeHandler(images));
+    menu.select(ImageSortType.DEFAULT);
+    menu.classList.remove('img-filters--inactive');
 
-    // for random
-    // gallery.setContent(images.slice(0, 10).sort(() => Math.random() - 0.5));
+    gallery.addEventListener('itemclick', handleGalleryItemClick);
   })
 
   .catch((error) => {
@@ -83,7 +96,7 @@ request(IMAGES_URL)
     });
   })
 
-  .then(() => {
+  .finally(() => {
     upload.addEventListener('formdata', handleUploadFormData);
   });
 
@@ -110,18 +123,18 @@ addEventListener('click', traceEvent, {capture: true});
 // });
 
 
-/**
- * @type {*}
- */
-const uploadImgElement = document.querySelector('#upload-file');
+// /**
+//  * @type {*}
+//  */
+// const uploadImgElement = document.querySelector('#upload-file');
 
-/**
- * @type {*}
- */
-const previewImageElement = document.querySelector('.img-upload__preview img');
+// /**
+//  * @type {*}
+//  */
+// const previewImageElement = document.querySelector('.img-upload__preview img');
 
-uploadImgElement.addEventListener('change', () => {
-  const file = uploadImgElement.files[0];
-  previewImageElement.src = URL.createObjectURL(file);
-});
+// uploadImgElement.addEventListener('change', () => {
+//   const file = uploadImgElement.files[0];
+//   previewImageElement.src = URL.createObjectURL(file);
+// });
 

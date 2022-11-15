@@ -89,24 +89,29 @@ export const request = (url, options) => fetch(url, options).then((response) => 
  * @param {Function} callback
  * @param {number} maxFreq
  */
+export const debounce = (callback, maxFreq = 500) => {
+
   // Используем замыкания, чтобы id таймаута у нас навсегда приклеился
   // к возвращаемой функции с setTimeout, тогда мы его сможем перезаписывать
-  let timeoutId;
-  const start = Date.now();
+  let id = null;
+  let lastCallDate = null;
+  // = Date.now();
+
 
   return (...rest) => {
-    // меняем таймер
-    timeoutDelay -= start;
-
     // Перед каждым новым вызовом удаляем предыдущий таймаут,
     // чтобы они не накапливались
-    clearTimeout(timeoutId);
+    clearTimeout(id);
 
     // Затем устанавливаем новый таймаут с вызовом колбэка на ту же задержку
-    // timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
-    timeoutId = setTimeout(() => callback(...rest), timeoutDelay);
+    id = setTimeout(() => {
+      callback(...rest);
+      lastCallDate = Date.now();
+
+    }, maxFreq - Math.min(maxFreq, Date.now() - lastCallDate));
+
 
     // Таким образом цикл «поставить таймаут - удалить таймаут» будет выполняться,
     // пока действие совершается чаще, чем переданная задержка timeoutDelay
   };
-}
+};

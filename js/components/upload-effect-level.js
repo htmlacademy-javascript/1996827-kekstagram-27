@@ -46,14 +46,6 @@ export default class UploadEffectLevel extends Component {
   }
 
   /**
-   * @param {number} value
-   */
-  set(value) {
-    this.input.value = String(value);
-    this.slider.set(value);
-  }
-
-  /**
    * @return {number}
    */
   get() {
@@ -70,6 +62,8 @@ export default class UploadEffectLevel extends Component {
   }
 
   handleSliderUpdate() {
+    this.input.value = String(this.get());
+
     this.dispatchEvent(new CustomEvent('update'));
   }
 }

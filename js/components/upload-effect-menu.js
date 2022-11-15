@@ -65,6 +65,17 @@ export default class UploadEffectMenu extends Component {
     radio.checked = true;
     radio.dispatchEvent(new Event('change', {bubbles: true}));
   }
+
+  /**
+   * @param {string} url
+   */
+  setImageUrl(url) {
+    this.querySelectorAll('span').forEach((item) => {
+      item.style.backgroundImage = `url(${url})`;
+    });
+  }
+
+
 }
 
 customElements.define(String(UploadEffectMenu), UploadEffectMenu);
