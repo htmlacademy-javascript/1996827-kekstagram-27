@@ -16,10 +16,6 @@
  */
 
 /**
- * @typedef {[min: number, max: number]} NumberRange
- */
-
-/**
  * @typedef ImageSortMenuItem
  * @prop {string} type
  * @prop {string} label
