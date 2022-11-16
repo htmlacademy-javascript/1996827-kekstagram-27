@@ -1,6 +1,7 @@
-import Component from './component.js';
+import Component, {html} from './component.js';
+import DialogContent from './dialog-content.js';
 
-export * from './component.js';
+export {html, DialogContent};
 
 
 /**
@@ -14,6 +15,11 @@ export default class Dialog extends Component {
 
     super.display(false);
 
+    /**
+     * @type {DialogContent}
+     */
+    this.content = this.querySelector(String(DialogContent));
+
     this.addEventListener('click', this.handleClick);
   }
 
@@ -24,6 +30,11 @@ export default class Dialog extends Component {
    */
   display(flag) {
     super.display(flag);
+
+    if (flag) {
+      this.scroll(0, 0);
+      this.content.reveal(0);
+    }
 
     document.body.classList.toggle('modal-open', flag);
     document.body[flag ? 'addEventListener' : 'removeEventListener' ]('keydown', this);

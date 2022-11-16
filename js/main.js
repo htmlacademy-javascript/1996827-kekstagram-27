@@ -2,13 +2,9 @@ import ImageDialog from './components/image-dialog.js';
 import ImageGallery from './components/image-gallery.js';
 import ImageSortMenu from './components/image-sort-menu.js';
 import StatusMessage from './components/status-message.js';
-import UploadDialog from './components/upload-dialog.js';
 import {ImageSortCompare, ImageSortLimit, ImageSortType} from './enums.js';
-// import generateImageStates from './images-generator.js';
-import {findKey, request, traceEvent, debounce} from './utils.js';
+import {findKey, request, debounce} from './utils.js';
 
-
-// const images = generateImageStates();
 
 const BASE_URL = 'https://27.javascript.pages.academy/kekstagram';
 const IMAGES_URL = `${BASE_URL}/data`;
@@ -88,7 +84,7 @@ request(IMAGES_URL)
   .then((images) => {
     menu.addEventListener('change', createMenuChangeHandler(images));
     menu.select(ImageSortType.DEFAULT);
-    menu.classList.remove('img-filters--inactive');
+    menu.reveal(0);
 
     gallery.addEventListener('itemclick', handleGalleryItemClick);
   })
@@ -103,15 +99,6 @@ request(IMAGES_URL)
   })
 
   .finally(() => {
+    upload.reveal(5);
     upload.addEventListener('formdata', handleUploadFormData);
   });
-
-
-
-addEventListener('change', traceEvent, {capture: true});
-addEventListener('open', traceEvent, {capture: true});
-addEventListener('close', traceEvent, {capture: true});
-addEventListener('click', traceEvent, {capture: true});
-
-// const {upload} = gallery;
-// upload.dialog.display(true);

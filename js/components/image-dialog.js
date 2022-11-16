@@ -1,4 +1,4 @@
-import Dialog, {html} from './dialog.js';
+import Dialog, {html, DialogContent} from './dialog.js';
 import ImageDiscussion from './image-discussion.js';
 
 
@@ -21,7 +21,7 @@ export default class ImageDialog extends Dialog {
   createHtml() {
     return html`
       <h2 class="big-picture__title  visually-hidden">Просмотр фотографии</h2>
-      <div class="big-picture__preview">
+      <${DialogContent}>
 
         <!-- Просмотр изображения -->
         <div class="big-picture__img">
@@ -39,7 +39,7 @@ export default class ImageDialog extends Dialog {
 
         <!-- Кнопка для выхода из полноэкранного просмотра изображения -->
         <button type="reset" class="big-picture__cancel  cancel" id="picture-cancel">Закрыть</button>
-      </div>
+      </${DialogContent}>
     `;
   }
 

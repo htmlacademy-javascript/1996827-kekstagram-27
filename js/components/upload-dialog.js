@@ -1,4 +1,4 @@
-import Dialog, {html} from './dialog.js';
+import Dialog, {html, DialogContent} from './dialog.js';
 import UploadScale from './upload-scale.js';
 import UploadPreview from './upload-preview.js';
 import UploadEffectLevel from './upload-effect-level.js';
@@ -45,7 +45,7 @@ export default class UploadDialog extends Dialog {
    */
   createHtml() {
     return html`
-      <div class="img-upload__wrapper">
+      <${DialogContent}>
         <div class="img-upload__preview-container">
 
           <!-- Изменение размера изображения -->
@@ -69,7 +69,7 @@ export default class UploadDialog extends Dialog {
 
         <!-- Кнопка для отправки данных на сервер -->
         <button type="submit" class="img-upload__submit" id="upload-submit">Опубликовать</button>
-      </div>
+      </${DialogContent}>
     `;
   }
 

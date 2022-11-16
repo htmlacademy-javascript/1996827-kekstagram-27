@@ -11,7 +11,7 @@ export default class ImageSortMenu extends Component {
   constructor() {
     super();
 
-    this.classList.add('img-filters');
+    this.classList.add('img-filters', 'reveal');
 
     this.querySelector('form').innerHTML = items.map(this.createItemHtml).join('');
 

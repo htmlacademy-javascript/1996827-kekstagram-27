@@ -34,6 +34,9 @@ export default class Component extends HTMLElement {
     super();
 
     this.insertAdjacentHTML('beforeend', this.createHtml(content));
+
+    this.addEventListener('animationend', this.handleAnimationEnd);
+    this.addEventListener('load', this.handleLoad, {capture: true});
   }
 
 
@@ -54,6 +57,32 @@ export default class Component extends HTMLElement {
    */
   display(flag) {
     this.classList.toggle('hidden', !flag);
+  }
+
+
+  /**
+   * Применит эффект раскрытия
+   * @param {number} index Индекс задержки
+   */
+  reveal(index) {
+    this.classList.add('reveal');
+    this.style.setProperty('--index', String(index));
+  }
+
+
+  /**
+   * @param {AnimationEvent & {target: HTMLElement}} event
+   */
+  handleAnimationEnd(event) {
+    event.target.classList.remove('reveal');
+    event.target.style.removeProperty('--index');
+  }
+
+  /**
+   * @param {UIEvent & {target: HTMLElement}} event
+   */
+  handleLoad(event) {
+    event.target.closest('.lazy')?.classList.remove('lazy');
   }
 
 

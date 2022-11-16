@@ -46,10 +46,11 @@ export default class ImageDiscussion extends Component {
 
   /**
    * @param {CommentState} comment
+   * @param {number} index
    */
-  createCommentHtml(comment) {
+  createCommentHtml(comment, index) {
     return html`
-      <li class="social__comment">
+      <li class="social__comment reveal" style="--index: ${index}">
         <img class="social__picture" src="${comment.avatar}" alt="${comment.name}." width="35" height="35">
         <p class="social__text">${comment.message}</p>
       </li>

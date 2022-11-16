@@ -1,4 +1,5 @@
 html {
+  --font-size: 283px;
   scrollbar-gutter: stable;
 }
 
@@ -13,13 +14,46 @@ image-gallery:not(:defined)::before {
   content: "Подготовка...";
 }
 
-image-dialog {
+image-dialog,
+upload-dialog {
   padding: 60px 0;
   scrollbar-gutter: stable;
 }
 
+dialog-content {
+  display: block;
+  margin: auto;
+  position: relative;
+  width: 600px;
+}
+
+upload-preview > img {
+  transition: transform 100ms;
+}
+
 upload-effect-menu {
   display: block;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(min(40px, 25%));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@supports (animation-name: reveal) {
+  .reveal {
+    opacity: 0;
+  }
+
+  .reveal:not(.lazy)[style*="--index"] {
+    animation: reveal 300ms calc(30ms * var(--index)) both;
+  }
 }
 
 .text {

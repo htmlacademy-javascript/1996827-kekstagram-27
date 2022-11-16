@@ -39,10 +39,11 @@ export default class ImageGallery extends Component {
 
   /**
    * @param {ImageState} image
+   * @param {number} index
    */
-  createImageHtml(image) {
+  createImageHtml(image, index) {
     return html`
-      <a href="#" class="picture" id="picture-${image.id}">
+      <a href="#" class="picture reveal lazy" style="--index: ${index}" id="picture-${image.id}">
         <img class="picture__img" src="${image.url}" width="182" height="182" alt="Случайная фотография">
         <p class="picture__info">
           <span class="picture__comments">${image.comments.length}</span>
