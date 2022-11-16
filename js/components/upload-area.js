@@ -6,7 +6,7 @@ export default class UploadArea extends Component {
   constructor() {
     super();
 
-    this.classList.add('img-upload');
+    this.classList.add('img-upload', 'reveal');
 
     this.form = this.querySelector('form');
 
