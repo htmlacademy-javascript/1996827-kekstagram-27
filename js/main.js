@@ -2,6 +2,7 @@ import ImageDialog from './components/image-dialog.js';
 import ImageGallery from './components/image-gallery.js';
 import ImageSortMenu from './components/image-sort-menu.js';
 import StatusMessage from './components/status-message.js';
+import UploadDialog from './components/upload-dialog.js';
 import {ImageSortCompare, ImageSortLimit, ImageSortType} from './enums.js';
 // import generateImageStates from './images-generator.js';
 import {findKey, request, traceEvent, debounce} from './utils.js';
@@ -51,6 +52,8 @@ const handleGalleryItemClick = (event) => {
  * @param {FormDataEvent} event
  */
 const handleUploadFormData = (event) => {
+  upload.dialog.setLoading(true);
+
   request(BASE_URL, {
     method: 'POST',
     body: event.formData
@@ -72,6 +75,10 @@ const handleUploadFormData = (event) => {
         title: 'Ошибка загрузки файла',
         action: 'Попробовать ещё раз'
       });
+    })
+
+    .finally(() => {
+      upload.dialog.setLoading(false);
     });
 };
 
@@ -98,6 +105,7 @@ request(IMAGES_URL)
   .finally(() => {
     upload.addEventListener('formdata', handleUploadFormData);
   });
+
 
 
 addEventListener('change', traceEvent, {capture: true});

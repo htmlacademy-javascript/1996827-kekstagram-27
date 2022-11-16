@@ -73,6 +73,13 @@ export default class UploadDialog extends Dialog {
     `;
   }
 
+  /**
+   * @param {boolean} flag
+   */
+  setLoading(flag) {
+    this.saveButton.disabled = flag;
+  }
+
 
   /**
    * @param {string} url

@@ -34,6 +34,8 @@ export default class UploadEffectLevel extends Component {
     });
 
     this.slider.on('update', this.handleSliderUpdate.bind(this));
+
+    this.preset(UploadEffectType.NONE);
   }
 
 
