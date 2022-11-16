@@ -72,14 +72,18 @@ export default class UploadArea extends Component {
    */
   handleChange(event) {
     if (event.target === this.form.filename) {
-      // TODO: подстановка изображений
+      const [file] = event.target.files;
+
+      this.dialog.setImageUrl(URL.createObjectURL(file));
       this.dialog.display(true);
     }
   }
 
+
   handleClose() {
     this.reset();
   }
+
 
   /**
    * @param {SubmitEvent} event
@@ -99,5 +103,6 @@ export default class UploadArea extends Component {
     new FormData(this.form);
   }
 }
+
 
 customElements.define(String(UploadArea), UploadArea);

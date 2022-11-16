@@ -19,8 +19,8 @@ export default class ImageGallery extends Component {
     this.images = [];
 
     this.addEventListener('click', this.handleClick);
-
   }
+
 
   /**
    * @override
@@ -35,6 +35,7 @@ export default class ImageGallery extends Component {
       <!-- Здесь будут изображения других пользователей -->
     `;
   }
+
 
   /**
    * @param {ImageState} image
@@ -51,16 +52,19 @@ export default class ImageGallery extends Component {
     `;
   }
 
+
   /**
    * @param {ImageState[]} images
    */
   setContent(images) {
     const imagesHtml = images.map(this.createImageHtml).join(' ');
 
+    this.querySelectorAll('.picture').forEach((item) => item.remove());
     this.insertAdjacentHTML('beforeend', imagesHtml);
 
     this.images = [...images];
   }
+
 
   /**
    * @param {MouseEvent & {target: Element}} event
@@ -77,8 +81,7 @@ export default class ImageGallery extends Component {
       this.dispatchEvent(new CustomEvent('itemclick', {detail}));
     }
   }
-
 }
 
-customElements.define(String(ImageGallery), ImageGallery);
 
+customElements.define(String(ImageGallery), ImageGallery);

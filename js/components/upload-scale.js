@@ -1,5 +1,6 @@
 import Component, {html} from './component.js';
 
+
 export default class UploadScale extends Component {
   constructor() {
     super();
@@ -20,6 +21,7 @@ export default class UploadScale extends Component {
     this.reset();
   }
 
+
   /**
    * @param {number} value
    */
@@ -30,6 +32,7 @@ export default class UploadScale extends Component {
 
     this.dispatchEvent(new CustomEvent('update'));
   }
+
 
   get value() {
     return Number.parseFloat(this.output.value);
@@ -46,17 +49,21 @@ export default class UploadScale extends Component {
     `;
   }
 
+
   reset() {
     this.value = this.max;
   }
+
 
   handleStepDownClick() {
     this.value -= this.step;
   }
 
+
   handleStepUpClick() {
     this.value += this.step;
   }
 }
+
 
 customElements.define(String(UploadScale), UploadScale);

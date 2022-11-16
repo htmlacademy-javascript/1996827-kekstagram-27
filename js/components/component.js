@@ -9,6 +9,7 @@ export const escapeHtml = (value) => {
   return value.replace(pattern, replacement);
 };
 
+
 /**
  * Тег шаблонной html-строки
  * @param {TemplateStringsArray} strings
@@ -20,6 +21,7 @@ export const html = (strings, ...values) => strings.reduce((before, after, index
 
   return before + escapeHtml(String(value)) + after;
 });
+
 
 /**
  * Базовый компонент
@@ -34,6 +36,7 @@ export default class Component extends HTMLElement {
     this.insertAdjacentHTML('beforeend', this.createHtml(content));
   }
 
+
   /**
    * Создаст дополнительную html-разметку
    * @param {Object} [content]
@@ -44,6 +47,7 @@ export default class Component extends HTMLElement {
     ` : '';
   }
 
+
   /**
    * Переключит видимость компонента
    * @param {boolean} flag
@@ -52,12 +56,14 @@ export default class Component extends HTMLElement {
     this.classList.toggle('hidden', !flag);
   }
 
+
   /**
    * Имя компонента в html
    */
   static get localName() {
     return this.name.replace(/(?!^)[A-Z]/g, '-$&').toLowerCase();
   }
+
 
   static toString() {
     return this.localName;

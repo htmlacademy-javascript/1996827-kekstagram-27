@@ -56,7 +56,7 @@ export const traceEvent = (event) => {
   const {trace} = console;
   const targetName = event.target.nodeName.toLowerCase();
 
-  trace(`%c${targetName}::${event.type}`, 'font-size: large');
+  // trace(`%c${targetName}::${event.type}`, 'font-size: large');
 };
 
 /**
@@ -83,3 +83,32 @@ export const request = (url, options) => fetch(url, options).then((response) => 
 
   return response.text();
 });
+
+/**
+ * Ограничит частоту вызова `callback`
+ * @param {Function} callback
+ * @param {number} maxFreq
+ */
+export const debounce = (callback, maxFreq = 500) => {
+  // Используем замыкания, чтобы id таймаута у нас навсегда приклеился
+  // к возвращаемой функции с setTimeout, тогда мы его сможем перезаписывать
+  let id = null;
+  let lastCallDate = null;
+
+  return (...rest) => {
+    // Перед каждым новым вызовом удаляем предыдущий таймаут,
+    // чтобы они не накапливались
+    clearTimeout(id);
+
+    // Затем устанавливаем новый таймаут с вызовом колбэка на задержку
+    id = setTimeout(() => {
+      callback(...rest);
+      lastCallDate = Date.now();
+
+    }, maxFreq - Math.min(maxFreq, Date.now() - lastCallDate));
+
+
+    // Таким образом цикл «поставить таймаут - удалить таймаут» будет выполняться,
+    // пока действие совершается чаще, чем переданная задержка timeoutDelay
+  };
+};

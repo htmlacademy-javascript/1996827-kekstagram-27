@@ -17,6 +17,7 @@ const createRangeOptions = (type) => {
   };
 };
 
+
 export default class UploadEffectLevel extends Component {
   constructor() {
     super();
@@ -33,7 +34,10 @@ export default class UploadEffectLevel extends Component {
     });
 
     this.slider.on('update', this.handleSliderUpdate.bind(this));
+
+    this.preset(UploadEffectType.NONE);
   }
+
 
   /**
    * @override
@@ -45,13 +49,6 @@ export default class UploadEffectLevel extends Component {
     `;
   }
 
-  /**
-   * @param {number} value
-   */
-  set(value) {
-    this.input.value = String(value);
-    this.slider.set(value);
-  }
 
   /**
    * @return {number}
@@ -59,6 +56,7 @@ export default class UploadEffectLevel extends Component {
   get() {
     return this.slider.get(true);
   }
+
 
   /**
    * @param {string} type
@@ -69,10 +67,13 @@ export default class UploadEffectLevel extends Component {
     this.display(type !== UploadEffectType.NONE);
   }
 
+
   handleSliderUpdate() {
+    this.input.value = String(this.get());
+
     this.dispatchEvent(new CustomEvent('update'));
   }
 }
 
-customElements.define(String(UploadEffectLevel), UploadEffectLevel);
 
+customElements.define(String(UploadEffectLevel), UploadEffectLevel);

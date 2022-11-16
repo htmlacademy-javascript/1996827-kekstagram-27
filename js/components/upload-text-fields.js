@@ -1,5 +1,6 @@
 import Component, {html} from './component.js';
 
+
 /**
  * @param {string} name
  * @param {(...args: string[]) => boolean} validator
@@ -13,6 +14,7 @@ const addValidator = (name, validator) =>
  */
 const list = (value) => value.split(' ').filter(Boolean);
 
+
 addValidator('item-pattern', (value, pattern, flags) => {
   const items = list(value);
   const regexp = new RegExp(pattern, flags);
@@ -20,11 +22,13 @@ addValidator('item-pattern', (value, pattern, flags) => {
   return items.every((item) => regexp.test(item));
 });
 
+
 addValidator('item-unique', (value) => {
   const items = list(value).map((item) => item.toLowerCase());
 
   return new Set(items).size === items.length;
 });
+
 
 addValidator('item-limit', (value, limit) => {
   const items = list(value);
@@ -32,11 +36,13 @@ addValidator('item-limit', (value, limit) => {
   return items.length <= Number(limit);
 });
 
+
 addValidator('item-maxlength', (value, maxlength) => {
   const items = list(value);
 
   return items.every((item) => item.length <= Number(maxlength));
 });
+
 
 export default class UploadTextFields extends Component {
   constructor() {
@@ -81,5 +87,6 @@ export default class UploadTextFields extends Component {
     `;
   }
 }
+
 
 customElements.define(String(UploadTextFields), UploadTextFields);

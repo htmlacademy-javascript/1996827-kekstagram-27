@@ -9,6 +9,7 @@ import {
   NAMES
 } from './data.js';
 
+
 /**
  * @returns {CommentState}
  */
@@ -18,6 +19,7 @@ const generateCommentState = () => ({
   message: getRandomArrayItem(MESSAGES),
   name: getRandomArrayItem(NAMES),
 });
+
 
 /**
  * @param {number} length
@@ -37,10 +39,10 @@ const generateImageState = (id) => ({
   comments: generateCommentStates(randomIntInRange(...COMMENTS_RANGE))
 });
 
+
 const generateImageStates = (length = 25) =>
   Array.from({length}, (_, index) => generateImageState(index + 1));
 
 export default generateImageStates;
-
 
 globalThis.generate = generateImageStates;

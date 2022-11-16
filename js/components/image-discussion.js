@@ -1,5 +1,6 @@
 import Component, {html} from './component.js';
 
+
 export default class ImageDiscussion extends Component {
   constructor() {
     super();
@@ -15,6 +16,7 @@ export default class ImageDiscussion extends Component {
 
     this.addEventListener('click', this.handleClick);
   }
+
 
   /**
    * @override
@@ -41,6 +43,7 @@ export default class ImageDiscussion extends Component {
     `;
   }
 
+
   /**
    * @param {CommentState} comment
    */
@@ -53,6 +56,7 @@ export default class ImageDiscussion extends Component {
     `;
   }
 
+
   /**
    * @param {CommentState[]} comments
    */
@@ -63,6 +67,7 @@ export default class ImageDiscussion extends Component {
     this.querySelector('ul').innerHTML = '';
     this.showMore();
   }
+
 
   showMore() {
     const comments = this.comments.splice(0, this.commentsLimit);
@@ -76,6 +81,7 @@ export default class ImageDiscussion extends Component {
     this.querySelector('.comments-loader').classList.toggle('hidden', !this.comments.length);
   }
 
+
   /**
    * @param {MouseEvent & {target: Element}} event
    */
@@ -87,6 +93,5 @@ export default class ImageDiscussion extends Component {
   }
 }
 
+
 customElements.define(String(ImageDiscussion), ImageDiscussion);
-
-

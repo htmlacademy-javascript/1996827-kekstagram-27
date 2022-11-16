@@ -1,10 +1,12 @@
 import Component, {html} from './component.js';
 import {UploadEffectLabel, UploadEffectType} from '../enums.js';
 
+
 const items = Object.keys(UploadEffectType).map((key) => ({
   type: UploadEffectType[key],
   label: UploadEffectLabel[key]
 }));
+
 
 export default class UploadEffectMenu extends Component {
   constructor() {
@@ -16,6 +18,7 @@ export default class UploadEffectMenu extends Component {
     this.reset();
   }
 
+
   /**
    * @override
    */
@@ -24,6 +27,7 @@ export default class UploadEffectMenu extends Component {
       <ul class="effects__list"></ul>
     `;
   }
+
 
   /**
    * @param {UploadEffectMenuItem} item
@@ -47,6 +51,7 @@ export default class UploadEffectMenu extends Component {
     `;
   }
 
+
   getSelectedValue() {
     /**
      * @type {HTMLInputElement}
@@ -55,6 +60,7 @@ export default class UploadEffectMenu extends Component {
 
     return radio?.value;
   }
+
 
   reset() {
     /**
@@ -65,6 +71,17 @@ export default class UploadEffectMenu extends Component {
     radio.checked = true;
     radio.dispatchEvent(new Event('change', {bubbles: true}));
   }
+
+
+  /**
+   * @param {string} url
+   */
+  setImageUrl(url) {
+    this.querySelectorAll('span').forEach((item) => {
+      item.style.backgroundImage = `url(${url})`;
+    });
+  }
 }
+
 
 customElements.define(String(UploadEffectMenu), UploadEffectMenu);

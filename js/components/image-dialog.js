@@ -14,6 +14,7 @@ export default class ImageDialog extends Dialog {
     this.discussion = this.querySelector(String(ImageDiscussion));
   }
 
+
   /**
    * @override
    */
@@ -42,6 +43,7 @@ export default class ImageDialog extends Dialog {
     `;
   }
 
+
   /**
    *
    * @param {ImageState} image
@@ -53,5 +55,6 @@ export default class ImageDialog extends Dialog {
     this.discussion.setContent(image.comments);
   }
 }
+
 
 customElements.define(String(ImageDialog), ImageDialog);
