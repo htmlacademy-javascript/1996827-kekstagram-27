@@ -1,5 +1,5 @@
-import {UploadEffectRange, UploadEffectType} from '../enums.js';
-import {findKey} from '../utils.js';
+import {UploadEffectType} from '../enums.js';
+import {uploadEffectRangeMap} from '../maps.js';
 import Component, {html} from './component.js';
 
 
@@ -7,7 +7,7 @@ import Component, {html} from './component.js';
  * @param {string} type
  */
 const createRangeOptions = (type) => {
-  const range = UploadEffectRange[findKey(UploadEffectType, type)];
+  const range = uploadEffectRangeMap[type];
   const [min, max, step] = range;
 
   return {

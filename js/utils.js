@@ -1,12 +1,4 @@
 /**
- * Найдет ключ объекта по значению
- * @param {Object} target
- * @param {*} value
- */
-export const findKey = (target, value) =>
-  Object.keys(target).find((key) => target[key] === value);
-
-/**
  * Отправит запрос на сервер
  * @param {string} url
  * @param {RequestInit} [options]

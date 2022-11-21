@@ -2,8 +2,10 @@ import ImageDialog from './components/image-dialog.js';
 import ImageGallery from './components/image-gallery.js';
 import ImageSortMenu from './components/image-sort-menu.js';
 import StatusMessage from './components/status-message.js';
-import {ImageSortCompare, ImageSortLimit, ImageSortType} from './enums.js';
-import {findKey, request, debounce} from './utils.js';
+
+import {ImageSortType} from './enums.js';
+import {imageSortCompareMap, imageSortLimitMap} from './maps.js';
+import {request, debounce} from './utils.js';
 
 
 const BASE_URL = 'https://27.javascript.pages.academy/kekstagram';
@@ -30,8 +32,8 @@ const dialog = document.querySelector(String(ImageDialog));
  * @param {ImageState[]} images
  */
 const createMenuChangeHandler = (images) => debounce(() => {
-  const key = findKey(ImageSortType, menu.getSelectedValue());
-  const newImages = [...images].sort(ImageSortCompare[key]).slice(0, ImageSortLimit[key]);
+  const key = menu.getSelectedValue();
+  const newImages = [...images].sort(imageSortCompareMap[key]).slice(0, imageSortLimitMap[key]);
 
   gallery.setContent(newImages);
 });

@@ -1,11 +1,9 @@
-import {ImageSortLabel, ImageSortType} from '../enums.js';
+import {imageSortLabelMap} from '../maps.js';
 import Component, {html} from './component.js';
 
 
-const items = Object.keys(ImageSortType).map((key) => ({
-  type: ImageSortType[key],
-  label: ImageSortLabel[key]
-}));
+const items = Object.entries(imageSortLabelMap).map(([type, label]) => ({type, label}));
+
 
 export default class ImageSortMenu extends Component {
   constructor() {
@@ -17,6 +15,7 @@ export default class ImageSortMenu extends Component {
 
     this.addEventListener('click', this.handleClick);
   }
+
 
   /**
    * @override

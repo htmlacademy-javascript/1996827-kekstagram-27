@@ -1,11 +1,9 @@
 import Component, {html} from './component.js';
-import {UploadEffectLabel, UploadEffectType} from '../enums.js';
+import {UploadEffectType} from '../enums.js';
+import {uploadEffectLabelMap} from '../maps.js';
 
 
-const items = Object.keys(UploadEffectType).map((key) => ({
-  type: UploadEffectType[key],
-  label: UploadEffectLabel[key]
-}));
+const items = Object.entries(uploadEffectLabelMap).map(([type, label]) => ({type, label}));
 
 
 export default class UploadEffectMenu extends Component {
