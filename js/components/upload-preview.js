@@ -1,6 +1,6 @@
 import Component, {html} from './component.js';
-import {UploadEffectType, UploadEffectCssFilter} from '../enums.js';
-import {findKey} from '../utils.js';
+import {UploadEffectType} from '../enums.js';
+import {uploadEffectCssFilterMap} from '../maps.js';
 
 
 export default class UploadPreview extends Component {
@@ -9,7 +9,7 @@ export default class UploadPreview extends Component {
 
     this.image = this.querySelector('img');
 
-    this.currentFilter = UploadEffectType.NONE;
+    this.currentFilter = uploadEffectCssFilterMap[UploadEffectType.NONE];
   }
 
 
@@ -37,7 +37,7 @@ export default class UploadPreview extends Component {
   setEffect(type) {
     this.image.className = `effects__preview--${type}`;
 
-    this.currentFilter = UploadEffectCssFilter[findKey(UploadEffectType, type)];
+    this.currentFilter = uploadEffectCssFilterMap[type];
   }
 
 
